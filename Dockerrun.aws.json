@@ -1,0 +1,37 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "server",
+      "image": "monkeyd/fib-server",
+      "hostname": "api",
+      "essential": false,
+      "memory": 128
+    },{
+      "name": "worker",
+      "image": "monkeyd/fib-worker",
+      "hostname": "worker",
+      "essential": false,
+      "memory": 128
+    },{
+      "name": "client",
+      "image": "monkeyd/fib-client",
+      "hostname": "client",
+      "essential": false,
+      "memory": 128
+    },{
+      "name": "nginx",
+      "image": "monkeyd/fib-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["server", "client"],
+      "memory": 128
+    }
+  ]
+}
